@@ -1,0 +1,53 @@
+<% include ../layout/header%>
+<% include ../layout/menu%>
+
+<div class="container">
+  <h3>Editar Produto</h3>
+  <div class="panel panel-default" style="height:600px; background: #ddddddcc">
+
+    <%if(validacao.length>0){%>
+    <div class="alert alert-danger" id="validacaoCadastroProduto">
+      <strong>Atenção!</strong>
+      <ul>
+        <% for(var i=0; i < validacao.length; i++){ %>
+        <li>
+          <%=validacao[i].msg%>
+        </li>
+        <% } %>
+
+      </ul>
+    </div>
+
+    <% }%>
+
+
+    <%if(adicionado.bool == 1){%>
+      <div class="alert alert-success" id="sucessoAdd">
+          <strong><%=adicionado.msg %></strong>
+      </div>
+    <% }%>
+
+    <form action="/produtos/<%= id %>" method="post" class="produto" name="form-cadastro-edit">
+      <div class="form-group">
+        <label for="idProduto">Código do produto</label>
+        <label class="form-control" id="idProduto" name="idProduto"><%= id %></label>
+      </div>
+      <div class="form-group">
+        <label for="nomeProduto">Produto</label>
+        <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" placeholder="Nome do produto" value="<%= nome %>">
+      </div>
+      <div class="form-group">
+        <label for="preco_produto">Preço</label>
+        <input type="text" class="form-control" id="precoProduto" name="precoProduto" placeholder="Preco do produto"
+          value="<%= preco %>">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="/produtos"><button type="button" class="btn btn-primary">Voltar</button></a>
+      <a href="/produtos"><button type="button" class="btn btn-primary">Cancelar</button></a>
+      
+      <input type="hidden" name="_method" value="PUT" />
+    </form>
+  </div>
+</div>
+<% include ../layout/footer%>

@@ -1,0 +1,56 @@
+<% include ../layout/header%>
+<% include ../layout/menu%>
+
+<div class="container">
+    <h3>Cadastro Produto</h3>
+    <div class="panel panel-default" style=" background: #ddddddcc">
+        <div id="listagemProdutos">
+            <h1 class="text-center">Listagem de produtos</h1>
+            <a href="/produtos/menu"><button type="button" class="btn btn-primary" style="margin: 10px;">Voltar</button></a>
+
+            <table id="listProdutos" class="table table-striped">
+
+                <tr>
+                    <th>id</th>
+                    <th>Nome</th>
+                    <th>Preco</th>
+                    <th></th>
+                </tr>
+
+                <!--
+                        Using FOREACH LOOP for the users array
+                        
+                        myArray.forEach(function(el, index) {
+                            // el - current element, i - index
+                        });
+                    -->
+                <% if (data) { %>
+                <% data.forEach(function(produto){ %>
+                <tr>
+                    <td>
+                        <%= produto.id %>
+                    </td>
+                    <td>
+                        <%= produto.nome %>
+                    </td>
+                    <td>
+                        <%= produto.preco %>
+                    </td>
+                    <td>
+                            <div style="float:right">
+                                <a href='/produtos/<%= produto.id %>'>Edit</a> &nbsp;							
+                                <form method="post" action="/produto/delete/<%= produto.id %>" style="float:right">
+                                    <input class="btn btn-primary" type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                </form>
+                            </div>
+                        </td>
+                </tr>
+                <% }) %>
+                <% } %>
+
+            </table>
+            <a href="/produtos/menu"><button type="button" class="btn btn-primary">Voltar</button></a>
+        </div>
+    </div>
+    <% include ../layout/footer%>
