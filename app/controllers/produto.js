@@ -155,3 +155,22 @@ module.exports.update = function (application, req, res) {
         })
     }
 }
+
+module.exports.delete = function (application, req, res) {
+    var produto = { id: req.params.id }
+	
+	req.getConnection(function(error, conn) {
+		conn.query('DELETE FROM produto WHERE id = ' + req.params.id, produto, function(err, result) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				// redirect to users list page
+				res.redirect('/produtos')
+			} else {
+				req.flash('success', 'User deleted successfully! id = ' + req.params.id)
+				// redirect to users list page
+				res.redirect('/produtos')
+			}
+		})
+	})
+}

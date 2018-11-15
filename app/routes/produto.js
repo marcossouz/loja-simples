@@ -22,4 +22,8 @@ module.exports = function(application){
     application.put("/produtos/(:id)", function(req, res){
         application.app.controllers.produto.update(application, req, res)
     })
+
+    application.delete("/produtos/(:id)", function(req, res){
+        application.app.controllers.produto.delete(application, req, res)
+    })
 }

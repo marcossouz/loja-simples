@@ -39,7 +39,7 @@
                     <td>
                             <div style="float:right">
                                 <a href='/produtos/<%= produto.id %>'>Edit</a> &nbsp;							
-                                <form method="post" action="/produto/delete/<%= produto.id %>" style="float:right">
+                                <form method="post" action="/produtos/<%= produto.id %>" style="float:right">
                                     <input class="btn btn-primary" type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
                                     <input type="hidden" name="_method" value="DELETE" />
                                 </form>
