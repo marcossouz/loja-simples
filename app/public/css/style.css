@@ -3,26 +3,18 @@ body {
     background-image: url("/image/vendas2.jpg");
 }
 
-.produtos {
+/* .produtos {
     margin-top: 15%;
     width:20%;
     height:auto;
-}
+} */
 
-#addIcone{
-    width: 16%;
-    margin-left: 30%;
-}
-#listagemProdutos{
+#listagemProdutos, #listagemClientes{
     padding: 5%;
 }
 
-#listarIcone{
-    width: 16%;
-    margin-left: 5%;
-}
 
-.produto{
+.produto, .cliente{
     margin-top: 10%;
     margin-left: 30%;
     margin-right: 30%;

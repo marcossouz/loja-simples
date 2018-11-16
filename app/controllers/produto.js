@@ -1,6 +1,3 @@
-module.exports.menu = function (application, req, res) {
-    res.render("./produto/menu");
-}
 
 module.exports.register = function (application, req, res) {
     res.render("./produto/register", { validacao: {}, dadosForm: {}, adicionado: { bool: 0 } });

@@ -1,5 +1,5 @@
 module.exports = function(application){
-    application.get("/venda", function(req, res){
-        application.app.controllers.venda.venda(application, req, res)
+    application.get("/vendas", function(req, res){
+        application.app.controllers.venda.list(application, req, res)
     })
 }

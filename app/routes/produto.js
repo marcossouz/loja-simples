@@ -1,8 +1,4 @@
 module.exports = function(application){
-    application.get("/produtos/menu", function(req, res){
-        application.app.controllers.produto.menu(application, req, res)
-    })
-    
     application.get("/produtos", function(req, res){
         application.app.controllers.produto.list(application, req, res)
     })

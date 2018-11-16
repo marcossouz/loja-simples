@@ -1,0 +1,81 @@
+<% include ../layout/header%>
+<% include ../layout/menu%>
+
+<script>
+  $("#navhome").removeClass("active");
+  $("#navprodutos").removeClass("active");
+  $("#navclientes").addClass("active");
+  $("#navvendas").removeClass("active");
+</script>
+
+<div class="container">
+  <h3>Clientes</h3>
+  <div class="panel panel-default" style="height:600px; background: #ddddddcc">
+    <div id="listagemClientes">
+      <h1 class="text-center">Listagem</h1>
+
+      <script>
+        $("#navhome").removeClass("active");
+        $("#navprodutos").removeClass("active");
+        $("#navclientes").addClass("active");
+        $("#navvendas").removeClass("active");
+      </script>
+
+      <input type="search" autofocus class="form-control ds-input" id="search-clientes" placeholder="Search...">
+      <a href="/clientes/register"><button type="button" class="btn btn-primary" style="margin: 12px;">Adicionar novo cliente</button></a>
+
+      <script type="text/javascript">
+        $(function () {
+          $("#search-clientes").keyup(function () {
+            var texto = $(this).val().toLowerCase();
+
+            $(".linhas-clientes").removeClass("hidden");
+            $(".linhas-clientes").each(function () {
+              if ($(this).text().toLowerCase().indexOf(texto) < 0)
+                $(this).addClass("hidden");
+            });
+          });
+        });
+      </script>
+
+
+      <table id="listClientes" class="table">
+
+        <tr>
+          <th>id</th>
+          <th>Nome</th>
+          <th></th>
+        </tr>
+
+        
+        <% if (data) { %>
+        <% data.forEach(function(cliente){ %>
+        <tr class="linhas-clientes">
+          <td>
+            <%= cliente.id %>
+          </td>
+          <td>
+            <%= cliente.nome %>
+          </td>
+          <td>
+            <div style="float:right">
+              <a href='/clientes/<%= cliente.id %>'>Edit</a> &nbsp;
+              <form method="post" action="/clientes/<%= cliente.id %>" style="float:right">
+                <input class="btn btn-primary" type="submit" name="delete" value='Delete' onClick="return confirm('Tem certeza que quer deletar esse dado?')" />
+                <input type="hidden" name="_method" value="DELETE" />
+              </form>
+            </div>
+          </td>
+        </tr>
+        <% }) %>
+        <% } %>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</div>
+<% include ../layout/footer%>

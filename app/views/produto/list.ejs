@@ -2,13 +2,37 @@
 <% include ../layout/menu%>
 
 <div class="container">
-    <h3>Cadastro Produto</h3>
+    <h3>Produtos</h3>
     <div class="panel panel-default" style=" background: #ddddddcc">
         <div id="listagemProdutos">
-            <h1 class="text-center">Listagem de produtos</h1>
-            <a href="/produtos/menu"><button type="button" class="btn btn-primary" style="margin: 10px;">Voltar</button></a>
+            <h1 class="text-center">Listagem</h1>
 
-            <table id="listProdutos" class="table table-striped">
+            <script>
+                $("#navhome").removeClass("active");
+                $("#navprodutos").addClass("active");
+                $("#navclientes").removeClass("active");
+                $("#navvendas").removeClass("active");
+            </script>
+        
+            <input type="search" autofocus class="form-control ds-input" id="search-produtos" placeholder="Search...">
+            <a href="/produtos/register"><button type="button" class="btn btn-primary" style="margin: 12px;">Adicionar novo produto</button></a>
+
+            <script type="text/javascript">
+                $(function(){
+                    $("#search-produtos").keyup(function(){
+                        var texto = $(this).val().toLowerCase();
+                        
+                        $(".linhas-produtos").removeClass("hidden");
+                        $(".linhas-produtos").each(function(){
+                            if($(this).text().toLowerCase().indexOf(texto) < 0)
+                               $(this).addClass("hidden");
+                        });
+                    });
+                });
+                </script>
+
+
+            <table id="listProdutos" class="table">
 
                 <tr>
                     <th>id</th>
@@ -26,7 +50,7 @@
                     -->
                 <% if (data) { %>
                 <% data.forEach(function(produto){ %>
-                <tr>
+                <tr class="linhas-produtos" >
                     <td>
                         <%= produto.id %>
                     </td>
@@ -50,7 +74,6 @@
                 <% } %>
 
             </table>
-            <a href="/produtos/menu"><button type="button" class="btn btn-primary">Voltar</button></a>
         </div>
     </div>
     <% include ../layout/footer%>
