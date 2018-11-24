@@ -45,7 +45,7 @@
     </table>
 
     <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect04">
+      <select class="custom-select" id="inputGroupSelect">
         <option selected>Selecione o cliente...</option>
         <% clientes.forEach(function(cliente){ %>
         <option value="volvo">
@@ -54,10 +54,12 @@
         <% }) %>
       </select>
       <div class="input-group-append">
+          <a href="/"><button class="btn btn-primary" onclick="return confirm('Deseja cancelar essa compra?')">Cancelar Compra</button></a>
+        </div>
+      <div class="input-group-append">
         <button class="btn btn-success" >Confirmar compra</button>
       </div>
     </div>
-    <a href="/"><button class="btn btn-primary" style="margin-top: 15px;" onclick="return confirm('Deseja cancelar essa compra?')">Cancelar Compra</button></a>
   </div>
 </div>
 
