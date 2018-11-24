@@ -1,0 +1,66 @@
+<% include ../layout/header%>
+<% include ../layout/menu%>
+
+<div class="container">
+  <h3>Carrinho de compras</h3>
+  <div class="panel panel-default" style="height:600px; background: #ddddddcc; padding: 13%;">
+
+    <table id="carrinho" class="table">
+
+      <tr>
+        <th>Nome</th>
+        <th>Preco</th>
+      </tr>
+
+      <!--
+                Using FOREACH LOOP for the users array
+                
+                myArray.forEach(function(el, index) {
+                    // el - current element, i - index
+                });
+              -->
+
+
+      <% if (data) { %>
+      <% var total = 0; %>
+      <% data.forEach(function(produto){ %>
+      <% total += produto.preco%>
+      <tr>
+        <td>
+          <%= produto.nome %>
+        </td>
+        <td>
+          <%= produto.preco %>
+        </td>
+      </tr>
+      <% }) %>
+      <% } %>
+
+      <tr class="table-info">
+        <th>total a pagar</th>
+        <th>
+          <%= total %>
+        </th>
+      </tr>
+    </table>
+
+    <div class="input-group">
+      <select class="custom-select" id="inputGroupSelect04">
+        <option selected>Selecione o cliente...</option>
+        <% clientes.forEach(function(cliente){ %>
+        <option value="volvo">
+          <%= cliente.nome %>
+        </option>
+        <% }) %>
+      </select>
+      <div class="input-group-append">
+        <button class="btn btn-success" >Confirmar compra</button>
+      </div>
+    </div>
+    <a href="/"><button class="btn btn-primary" style="margin-top: 15px;" onclick="return confirm('Deseja cancelar essa compra?')">Cancelar Compra</button></a>
+  </div>
+</div>
+
+
+</div>
+<% include ../layout/footer%>

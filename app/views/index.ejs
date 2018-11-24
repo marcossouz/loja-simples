@@ -1,12 +1,40 @@
-
 <% include layout/header%>
 <% include layout/menu%>
-  
+
 <div class="container">
-
-
   <h3>FRENTE DE LOJA</h3>
-  
+
   <p class="img">Bem Vindo ao Melhor Site de Vendas Online.</p>
+
+  <script type="text/javascript" src="/js/frenteLoja.js"></script>
+    <input type="search" autofocus class="form-control ds-input" id="search-produtos" placeholder="Search...">
+    <button class="btn btn-success" id="comprarItens" style="float: right; margin-top: 15px; margin-bottom: 15px;">Comprar itens selecionados  [0] </button>
+    <form id="formCar" action="/carrinho" method="post">
+      <input type="hidden" id="carrinhoCompras" name="dados" value="">
+    </form>
+    <table class="table table-dark rounded">
+  
+      <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th></th>
+        </tr>
+    <% if(data){ %>
+    <% data.forEach(function(produto){ %>
+    <tr class="linhas-produtos">
+      <td>
+        <%= produto.nome %>
+      </td>
+      <td>
+        R$ <%= produto.preco %>
+      </td>
+      <td>
+        <button class="btn addCar" style="float: right;" id="<%= produto.id %>">Adicionar ao carrinho</button>
+      </td>
+    </tr>
+    <% }) %>
+    <% } %>
+  </table>
+
 </div>
 <% include layout/footer%>

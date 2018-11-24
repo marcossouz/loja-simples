@@ -1,13 +1,39 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">FrenteLoja</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li id="navhome" class="active"><a href="/">Home</a></li>
-        <li id="navprodutos"><a href="/produtos">Produtos</a></li>
-        <li id="navclientes"><a href="/clientes">Clientes</a></li>
-        <li id="navvendas"><a href="/vendas">Vendas</a></li>
-      </ul>
-    </div>
-  </nav>
+<script>
+  function menushow(){
+    if($('#navbarhome').attr('class') == 'navbar-collapse collapse'){
+      $('#navbarhome').attr("class", "navbar-collapse collapse show");
+      $('#menush').attr("aria-expanded", "false");
+    } else {
+      $('#navbarhome').attr("class", "navbar-collapse collapse");
+      $('#menush').attr("class", "navbar-toggler collapsed");
+      $('#menush').attr("aria-expanded", "true");
+    }
+    
+  }
+</script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">FrenteLoja</a>
+  <button id="menush" class="navbar-toggler" type="button" onclick="menushow()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse collapse" id="navbarhome">
+    <ul class="navbar-nav mr-auto">
+      <li id="navhome" class="nav-item active">
+        <a class="nav-link" href="/">Home</span></a>
+      </li>
+      <li id="navprodutos" class="nav-item">
+        <a class="nav-link" href="/produtos">Produtos</a>
+      </li>
+      <li id="navclientes" class="nav-item">
+        <a class="nav-link" href="/clientes">Clientes</a>
+      </li>
+      <li id="navvendas" class="nav-item">
+        <a class="nav-link" href="/vendas">Vendas</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

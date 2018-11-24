@@ -22,10 +22,10 @@
                     $("#search-produtos").keyup(function(){
                         var texto = $(this).val().toLowerCase();
                         
-                        $(".linhas-produtos").removeClass("hidden");
+                        $(".linhas-produtos").removeClass("d-none");
                         $(".linhas-produtos").each(function(){
                             if($(this).text().toLowerCase().indexOf(texto) < 0)
-                               $(this).addClass("hidden");
+                               $(this).addClass("d-none");
                         });
                     });
                 });
