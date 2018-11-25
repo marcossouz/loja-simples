@@ -3,14 +3,12 @@ body {
     background-image: url("/image/vendas2.jpg");
 }
 
-/* .produtos {
-    margin-top: 15%;
-    width:20%;
-    height:auto;
-} */
-
 #listagemProdutos, #listagemClientes{
     padding: 5%;
+}
+
+#listagemVendas{
+    padding: 15%;
 }
 
 

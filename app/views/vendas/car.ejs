@@ -3,66 +3,118 @@
 
 <div class="container">
   <h3>Carrinho de compras</h3>
-  <div class="panel panel-default" style="height:600px; background: #ddddddcc; padding: 13%;">
+  <div class="panel panel-default" style=" background: #ddddddcc; padding: 13%;">
+    <div id="carrinhoCompras">
+      <script src="/js/car.js"></script>
 
-    <table id="carrinho" class="table">
+      <table id="carrinho" class="table">
 
-      <tr>
-        <th>Nome</th>
-        <th>Preco</th>
-      </tr>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Preco</th>
+        </tr>
 
-      <!--
-                Using FOREACH LOOP for the users array
-                
-                myArray.forEach(function(el, index) {
-                    // el - current element, i - index
-                });
-              -->
+        <%
+        if (data) { %>
+        <% var total = 0.0; 
+
+        function Compra(){
+          this.cliente = {};
+          this.produtos = [];
+
+          this.addCliente = function(cliente){
+            this.cliente = cliente;
+          }
+          this.addProduto = function(produto){
+            this.produtos.push(produto);
+          }
+        };
+        
+        function Cliente(id, nome){
+          this.id = id;
+          this.nome = nome;
+        };
+
+        function Produto(id, nome, preco){
+          this.id = id;
+          this.name = nome = nome;
+          this.preco = preco;
+          this.quantidade = 1;
+
+          this.setQuantidade = function(quantidade){
+            this.quantidade = quantidade;
+          }
+        };
+
+        var compra = new Compra();
+        
+        %>
+
+        <% data.forEach(function(produto){ %>
+        <% total += produto.preco %>
 
 
-      <% if (data) { %>
-      <% var total = 0; %>
-      <% data.forEach(function(produto){ %>
-      <% total += produto.preco%>
-      <tr>
-        <td>
-          <%= produto.nome %>
-        </td>
-        <td>
-          <%= produto.preco %>
-        </td>
-      </tr>
-      <% }) %>
-      <% } %>
+        <%
+          var prod = new Produto(produto.id, produto.nome, produto.preco);
+          compra.addProduto(prod);
+        %>
 
-      <tr class="table-info">
-        <th>total a pagar</th>
-        <th>
-          <%= total %>
-        </th>
-      </tr>
-    </table>
-
-    <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect">
-        <option selected>Selecione o cliente...</option>
-        <% clientes.forEach(function(cliente){ %>
-        <option value="volvo">
-          <%= cliente.nome %>
-        </option>
+        <tr>
+          <td>
+            <%= produto.nome %>
+          </td>
+          <td><button class="btnMenos" name="<%= produto.id%>"> - </button>
+            <label id="<%= produto.id%>label" style="margin-left: 10px; margin-right: 10px;"> 1 </label>
+            <button class="btnMais" name="<%= produto.id%>"> + </button>
+          </td>
+          <td>
+            <input type="hidden" id="<%= produto.id %>preco" value="<%= produto.preco %>">
+            R$ <label id="<%= produto.id%>labelpreco">
+              <%= (produto.preco).toFixed(2) %></label>
+          </td>
+        </tr>
         <% }) %>
-      </select>
-      <div class="input-group-append">
-          <a href="/"><button class="btn btn-primary" onclick="return confirm('Deseja cancelar essa compra?')">Cancelar Compra</button></a>
+        <% } %>
+
+        <tr class="table-info">
+          <td></td>
+          <th>total a pagar</th>
+          <th>
+            <label id="precototal">
+              <%= total.toFixed(2) %></label>
+          </th>
+        </tr>
+      </table>
+
+      <div id="validacaoSelect" class="alert alert-danger d-none" role="alert">
+        <p class="text-center">Escolha um cliente para concluir a comprar!</p>
+      </div>
+
+      <div class="input-group">
+        <select class="custom-select" id="clienteSelect">
+          <option selected>Selecione o cliente...</option>
+          <% clientes.forEach(function(cliente){ %>
+          <option value='{"id":<%= cliente.id %>,"nome": "<%= cliente.nome %>"}'>
+            <%= cliente.nome %>
+          </option>
+          <% }) %>
+        </select>
+        <div class="input-group-append">
+          <a href="/"><button class="btn btn-primary" onclick="return confirm('Deseja cancelar essa compra?')">Cancelar
+              Compra</button></a>
         </div>
-      <div class="input-group-append">
-        <button class="btn btn-success" >Confirmar compra</button>
+        <div class="input-group-append">
+          <button id="concluircompra" class="btn btn-success">Confirmar compra</button>
+
+
+
+          <form id="concluirCompra" action="/comprovante" method="post">
+            <input type="hidden" id="dadosCompra" name="dados" value="<%= JSON.stringify(compra) %>">
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
 </div>
 <% include ../layout/footer%>

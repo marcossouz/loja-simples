@@ -27,6 +27,8 @@ $(function () {
 
     $("#comprarItens").click(function(){
         $("#carrinhoCompras").val(carrinho);
-        $("#formCar").submit();
+        if(carrinho.length > 0){
+            $("#formCar").submit();
+        }
     });
 });

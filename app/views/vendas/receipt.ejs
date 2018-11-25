@@ -1,0 +1,56 @@
+<% include ../layout/header%>
+<% include ../layout/menu%>
+
+<div class="container">
+    <h3>Compra Realizada com sucesso!</h3>
+    <div class="panel panel-default" style="margin: 10%; background: #ddddddcc">
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <p class="text-center">Obrigado por comprar na Nossa loja!</p>
+            </div>
+            <div class="card-body" style="margin-right: 20%; margin-left: 20%;">
+
+                <h2 class="display-4 text-center">Sua compra</h2>
+                <br><br>
+                <script>
+                    $(function () {
+                        var venda = <%- venda %>;
+                        var total = 0;
+
+                        $("#comprovante").append(
+                            '<tr>' +
+                            '<td>Cliente:</td>' +
+                            '<th colspan=2 class="text-right">' + venda.cliente.nome + '</th>' +
+                            '</tr>'
+                            );
+
+                        venda.produtos.forEach(function (produto) {
+                            $("#comprovante").append(
+                                "<tr>" +
+                                "<td style='width:50px;'>" + produto.quantidade + "</td>" +
+                                "<td style='width:200px;'>" + produto.name + "</td>" +
+                                "<td class='text-right'> R$ " + (produto.preco * produto.quantidade).toFixed(2) + "</td>" +
+                                "</tr>"
+                            );
+
+                            total += produto.preco;
+                        });
+
+                        $("#comprovante").append(
+                            '<tr>' +
+                            '<td colspan=2 >Valor Total:</td>' +
+                            '<th class="text-right">R$ ' + total.toFixed(2) + '</th>' +
+                            '</tr>'
+                            );
+                    });
+                </script>
+                <table id="comprovante" align='center' class='table bg-info'>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<% include ../layout/footer%>

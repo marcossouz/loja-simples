@@ -6,4 +6,8 @@ module.exports = function(application){
     application.post("/carrinho", function(req, res){
         application.app.controllers.venda.car(application, req, res)
     })
+    
+    application.post("/comprovante", function(req, res){
+        application.app.controllers.venda.receipt(application, req, res)
+    })
 }

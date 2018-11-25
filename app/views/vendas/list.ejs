@@ -9,9 +9,44 @@
 </script>
 
 <div class="container">
-  <h3>Vendas Realizadas</h3>
-  <div class="panel panel-default" style="height:600px; background: #ddddddcc">
-    <div class="panel-body">Em certo periodo de tempo</div>
+  <h3 class="text-center">Vendas Realizadas</h3>
+  <div class="panel panel-default" style=" background: #ddddddcc">
+  <div id="listagemVendas">
+    <script type="text/javascript">
+                $(function(){
+                    $("#search-vendas").keyup(function(){
+                        var texto = $(this).val().toLowerCase();
+
+                        $(".linhas-vendas").removeClass("d-none");
+                        $(".linhas-vendas").each(function(){
+                            if($(this).text().toLowerCase().indexOf(texto) < 0)
+                               $(this).addClass("d-none");
+                        });
+                    });
+                });
+                </script>
+
+            <input type="search" autofocus class="form-control ds-input" id="search-vendas" placeholder="Search...">
+              <table id="listVendas" class="table text-center">
+                <tr>
+                    <th>Cliente Id</th>
+                    <th>Data da venda</th>
+                </tr>
+
+                <% if (data) { %>
+                <% data.forEach(function(venda){ %>
+                <tr class="linhas-vendas" >
+                    <td>
+                        <%= venda.cliente_id %>
+                    </td>
+                    <td>
+                        <%= venda.data %>
+                    </td>
+                </tr>
+                <% }) %>
+                <% } %>
+
+            </table>
 
   </div>
 </div>
